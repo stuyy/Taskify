@@ -5,3 +5,8 @@
 This project does not use a backend.
 
 https://ansonfoong.github.io/AngularTaskApp/TaskAppNg/
+
+To-Do:
+
+- Allow user to modify progress.
+- Allow user to clear tasks from UI
