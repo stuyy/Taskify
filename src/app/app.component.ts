@@ -38,6 +38,7 @@ export class AppComponent {
   error =  [];
   progressRange =  0;
   public isCollapsed = true;
+  editTaskFlag=false;
   constructor(config: NgbProgressbarConfig)
   {
     config.max = 100;
@@ -83,7 +84,8 @@ export class AppComponent {
       title: this.taskTitle,
       description: this.taskDescription,
       isCollapsed: true,
-      progress: this.progressRange
+      progress: this.progressRange,
+      editTask: false
     }
     console.log(newTask);
     this.tasks.push(newTask);
@@ -101,5 +103,9 @@ export class AppComponent {
   {
     this.progressRange=parseInt($event);
     console.log(this.progressRange);
+  }
+  delete(task)
+  {
+    console.log(task); // Delete task.
   }
 }
