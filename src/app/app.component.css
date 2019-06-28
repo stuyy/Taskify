@@ -1,3 +1,12 @@
-main {
+.main-content {
     display: flex;
+    padding: 20px;
+    justify-content: space-around;
+}
+
+header {
+    background-color:  #283044;
+    text-align: left;
+    color: white;
+    padding: 7px 0 5px 75px;
 }

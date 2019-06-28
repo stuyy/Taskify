@@ -1,29 +1,36 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<header class="jumbotron-fluid">
-  <h1 class="display-4">Stay Organized</h1>
-  <hr class="my-4">
+
+<header>
+    <h1 class="lead">Stay Organized - Create Some Tasks</h1>
 </header>
 <main>
-  <section>
-    <button type="button" class="btn btn-success" (click)="newTask()"><i class="fas fa-plus-square"></i> {{buttonTaskTitle}}</button>
-    <button type="submit" class="btn btn-primary" *ngIf="show" (click)="addTask()">Add Task</button>
-    <form class="task-form" [@newTask]="show ? 'show' : 'hidden'">
-      <div class="input-group">
-          <input type="text" class="form-control" placeholder="Title" name="taskTitle" [(ngModel)]="taskTitle">
-      </div>
-      <div class="input-group">
-        <textarea class="form-control" placeholder="What is your goal?"rows="3" name="taskDescription" [(ngModel)]="taskDescription"></textarea>
-      </div>
-    </form>
+  
+  <ngb-alert type="danger" (close)="close(error.indexOf(err))" *ngFor="let err of error">{{err}}</ngb-alert>
+  <section class="main-content">
+      <section>
+          <button type="button" class="btn btn-success" (click)="newTask()"><i class="fas fa-plus-square"></i> {{buttonTaskTitle}}</button>
+          
+          <form class="task-form" [@newTask]="show ? 'show' : 'hidden'">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Title" name="taskTitle" [(ngModel)]="taskTitle">
+            </div>
+            <div class="input-group">
+              <textarea class="form-control" placeholder="What is your goal?"rows="3" name="taskDescription" [(ngModel)]="taskDescription"></textarea>
+            </div>
+            <button type="button" class="btn btn-warning" (click)="reset()" *ngIf="show">Reset</button>
+              <button type="submit" class="btn btn-primary" *ngIf="show" (click)="addTask()">Add Task</button>
+          </form>
+        </section>
+        <aside class="tasks" *ngIf="tasks.length > 0">
+          <h1>Tasks</h1>
+          <div *ngFor="let task of tasks" [attr.id]="task.title">
+              <button type="button" class="btn btn-info" (click)="task.isCollapsed = !task.isCollapsed">View {{task.title}} </button>
+              <div [ngbCollapse]="task.isCollapsed">
+                  <p>{{task.description}}</p>
+                  <p>Your Progress:<ngb-progressbar value="500" type="info"></ngb-progressbar></p>
+              </div>
+          </div>
+        </aside>  
   </section>
-  <aside class="tasks">
-    <h1>Tasks</h1>
-    <div *ngFor="let task of tasks" [attr.id]="task.title">
-        <button type="button" class="btn btn-info" (click)="task.isCollapsed = !task.isCollapsed">{{task.title}} <i class="fas fa-eye"></i></button>
-        <div [ngbCollapse]="task.isCollapsed">
-            {{task.description}}
-            <ngb-progressbar value="250"></ngb-progressbar>
-        </div>
-    </div>
-  </aside>  
 </main>
+<!--https://stackoverflow.com/questions/50341279/ng-bootstrap-collapse-component-collapses-all-components-when-toggling-one-ang-->
