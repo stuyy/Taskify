@@ -6,7 +6,7 @@
 <main>
   <section>
     <button type="button" class="btn btn-success" (click)="newTask()"><i class="fas fa-plus-square"></i> {{buttonTaskTitle}}</button>
-    <button type="submit" class="btn btn-primary" *ngIf="show">Add Task</button>
+    <button type="submit" class="btn btn-primary" *ngIf="show" (click)="addTask()">Add Task</button>
     <form class="task-form" [@newTask]="show ? 'show' : 'hidden'">
       <div class="input-group">
           <input type="text" class="form-control" placeholder="Title" name="taskTitle" [(ngModel)]="taskTitle">
@@ -16,4 +16,14 @@
       </div>
     </form>
   </section>
+  <aside class="tasks">
+    <h1>Tasks</h1>
+    <div *ngFor="let task of tasks" [attr.id]="task.title">
+        <button type="button" class="btn btn-info" (click)="task.isCollapsed = !task.isCollapsed">{{task.title}} <i class="fas fa-eye"></i></button>
+        <div [ngbCollapse]="task.isCollapsed">
+            {{task.description}}
+            <ngb-progressbar value="250"></ngb-progressbar>
+        </div>
+    </div>
+  </aside>  
 </main>

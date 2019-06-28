@@ -14,9 +14,11 @@ import {
   animations: [
     trigger('newTask', [
       state('hidden', style({
+        visibility: 'hidden',
         opacity: 0
       })),
       state('show', style({
+        visibility: 'visible',
         opacity: 1
       })),
       transition('hidden <=> show', [
@@ -31,6 +33,8 @@ export class AppComponent {
   taskTitle = '';
   taskDescription = '';
   show = false;
+  tasks = []
+  public isCollapsed = true;
   newTask()
   {
     this.show = !this.show;
@@ -42,5 +46,14 @@ export class AppComponent {
       this.taskTitle = '';
       this.taskDescription = '';
     }
+  }
+  addTask()
+  {
+    let newTask = {
+      title: this.taskTitle,
+      description: this.taskDescription,
+      isCollapsed: true
+    }
+    this.tasks.push(newTask);
   }
 }
