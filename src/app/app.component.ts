@@ -36,14 +36,19 @@ export class AppComponent {
   show = false;
   tasks = []
   error =  [];
+  progressRange =  0;
   public isCollapsed = true;
   constructor(config: NgbProgressbarConfig)
   {
-    config.max = 1000;
+    config.max = 100;
     config.striped = true;
     config.animated = true;
     config.type = 'success';
     config.height = '20px';
+  }
+  ngOnInit()
+  {
+    this.tasks = JSON.parse(localStorage.tasksAdded);
   }
   newTask()
   {
@@ -77,8 +82,10 @@ export class AppComponent {
     let newTask = {
       title: this.taskTitle,
       description: this.taskDescription,
-      isCollapsed: true
+      isCollapsed: true,
+      progress: this.progressRange
     }
+    console.log(newTask);
     this.tasks.push(newTask);
     localStorage.tasksAdded = JSON.stringify(this.tasks);
   }
@@ -89,5 +96,10 @@ export class AppComponent {
   {
     this.taskTitle  = '';
     this.taskDescription = '';
+  }
+  setRange($event)
+  {
+    this.progressRange=parseInt($event);
+    console.log(this.progressRange);
   }
 }

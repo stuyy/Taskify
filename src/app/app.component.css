@@ -2,6 +2,8 @@
     display: flex;
     padding: 20px;
     justify-content: space-around;
+    width: 70%;
+    margin: 0 auto;
 }
 
 header {
@@ -9,4 +11,27 @@ header {
     text-align: left;
     color: white;
     padding: 7px 0 5px 75px;
+}
+
+.task-description {
+    padding: 20px;
+    background-color: #D6DFD9;
+}
+.task-form {
+    width:  350px;
+}
+.tasks {
+    width: 350px;
+}
+
+@media only screen and (max-width: 1341px)
+{
+    .main-content
+    {
+        flex-direction: column;
+        width:100%;
+    }
+    .task-form, .tasks {
+        width: 100%;
+    }
 }

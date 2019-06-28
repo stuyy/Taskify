@@ -4,33 +4,40 @@
     <h1 class="lead">Stay Organized - Create Some Tasks</h1>
 </header>
 <main>
-  
   <ngb-alert type="danger" (close)="close(error.indexOf(err))" *ngFor="let err of error">{{err}}</ngb-alert>
   <section class="main-content">
-      <section>
-          <button type="button" class="btn btn-success" (click)="newTask()"><i class="fas fa-plus-square"></i> {{buttonTaskTitle}}</button>
-          
-          <form class="task-form" [@newTask]="show ? 'show' : 'hidden'">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Title" name="taskTitle" [(ngModel)]="taskTitle">
-            </div>
-            <div class="input-group">
-              <textarea class="form-control" placeholder="What is your goal?"rows="3" name="taskDescription" [(ngModel)]="taskDescription"></textarea>
-            </div>
-            <button type="button" class="btn btn-warning" (click)="reset()" *ngIf="show">Reset</button>
-              <button type="submit" class="btn btn-primary" *ngIf="show" (click)="addTask()">Add Task</button>
-          </form>
-        </section>
-        <aside class="tasks" *ngIf="tasks.length > 0">
-          <h1>Tasks</h1>
-          <div *ngFor="let task of tasks" [attr.id]="task.title">
-              <button type="button" class="btn btn-info" (click)="task.isCollapsed = !task.isCollapsed">View {{task.title}} </button>
-              <div [ngbCollapse]="task.isCollapsed">
-                  <p>{{task.description}}</p>
-                  <p>Your Progress:<ngb-progressbar value="500" type="info"></ngb-progressbar></p>
-              </div>
+    <section>
+      <h1>Create a new Task</h1>
+      <button type="button" class="btn btn-success col-12 mt-4" (click)="newTask()"><i class="fas fa-plus-square"></i> {{buttonTaskTitle}}</button>
+        <form class="task-form" [@newTask]="show ? 'show' : 'hidden'">
+          <div class="input-group">
+              <input type="text" class="form-control" placeholder="Title" name="taskTitle" [(ngModel)]="taskTitle">
           </div>
-        </aside>  
+          <div class="input-group">
+            <textarea class="form-control" placeholder="What is your goal?"rows="3" name="taskDescription" [(ngModel)]="taskDescription"></textarea>
+          </div>
+          <div class="input-group">
+            <label for="formControlRange">Current Progress {{progressRange}} %</label>
+            <input type="range" name="range" class="form-control-range" min="0" max="100" [(ngModel)]="progressRange" (ngModelChange)="setRange($event)" value="0">
+          </div>
+          <button type="button" class="btn btn-warning" (click)="reset()" *ngIf="show">Reset</button>
+            <button type="submit" class="btn btn-primary" *ngIf="show" (click)="addTask()">Add Task</button>
+        </form>
+    </section>
+    <aside class="tasks" *ngIf="tasks.length > 0">
+      <h1>Tasks</h1>
+      <div *ngFor="let task of tasks" [attr.id]="task.title">
+          <button type="button" class="btn btn-info col-12 mt-4" (click)="task.isCollapsed = !task.isCollapsed">View {{task.title}} </button>
+          <div [ngbCollapse]="task.isCollapsed" class="task-description">
+              <p>{{task.description}}</p>
+              <p>Your Progress:</p>
+              <ngb-progressbar *ngIf="task.progress < 100; else completed" [showValue]="true" value={{task.progress}} type="info"></ngb-progressbar>
+              <ng-template #completed>
+                  <ngb-progressbar value={{task.progress}} type="info" >Completed!</ngb-progressbar>
+              </ng-template>
+          </div>
+      </div>
+    </aside>  
   </section>
 </main>
 <!--https://stackoverflow.com/questions/50341279/ng-bootstrap-collapse-component-collapses-all-components-when-toggling-one-ang-->
