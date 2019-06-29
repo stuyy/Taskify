@@ -51,6 +51,9 @@ export class AppComponent {
   ngOnInit()
   {
     this.tasks = JSON.parse(localStorage.tasksAdded);
+    this.tasks.forEach(el => {
+      el.isCollapsed = true;
+    })
   }
   newTask()
   {
@@ -84,12 +87,24 @@ export class AppComponent {
     let newTask = {
       title: this.taskTitle,
       description: this.taskDescription,
-      isCollapsed: true,
+      isCollapsed: false,
       progress: this.progressRange,
       editTask: false
     }
     console.log(newTask);
     this.tasks.push(newTask);
+    localStorage.tasksAdded = JSON.stringify(this.tasks);
+    this.taskTitle = '';
+    this.taskDescription = '';
+  }
+  editTask(taskToEdit)
+  {
+    console.log(taskToEdit);
+    this.tasks[taskToEdit].editTask=true;
+  }
+  saveEditedTask(taskToEdit)
+  {
+    this.tasks[taskToEdit].editTask=false;
     localStorage.tasksAdded = JSON.stringify(this.tasks);
   }
   close(alert) {
@@ -102,14 +117,15 @@ export class AppComponent {
   }
   setRange($event)
   {
-    this.progressRange=parseInt($event);
+    console.log($event);
+    this.progressRange=parseInt($event.value);
     console.log(this.progressRange);
   }
   modifyProgress(taskIndex, value)
   {
-    this.tasks[taskIndex].progress = value;
+    this.tasks[taskIndex].progress = value.value;
     let localTasks = JSON.parse(localStorage.tasksAdded);
-    localTasks[taskIndex].progress = value;
+    localTasks[taskIndex].progress = value.value;
     localStorage.tasksAdded = JSON.stringify(localTasks);
   }
   delete(task)

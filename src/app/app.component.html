@@ -9,7 +9,7 @@
   <section class="main-content">
     <section>
       <h1>Create a new Task</h1>
-      <button type="button" class="btn btn-success col-12 mt-4" (click)="newTask()"><i class="fas fa-plus-square"></i> {{buttonTaskTitle}}</button>
+        <button type="button" class="btn btn-success col-12 mt-2" (click)="newTask()"><i class="fas fa-plus-square"></i> {{buttonTaskTitle}}</button>
         <form class="task-form" [@newTask]="show ? 'show' : 'hidden'">
           <div class="input-group">
               <input type="text" class="form-control" placeholder="Title" name="taskTitle" [(ngModel)]="taskTitle">
@@ -18,9 +18,9 @@
             <textarea class="form-control noresize" placeholder="What is your goal?"rows="3" name="taskDescription" [(ngModel)]="taskDescription"></textarea>
           </div>
           <div class="input-group">
-            <label for="formControlRange">Current Progress {{progressRange}} %</label>
-            <input type="range" name="range" class="form-control-range " min="0" max="100" [(ngModel)]="progressRange" (ngModelChange)="setRange($event)" value="0">
-            <mat-slider min="0" max="100" value="0" name="range" [(ngModel)]="progressRange"></mat-slider>
+            <label for="formControlRange">Current Progress: {{progressRange}} %</label>
+            <!-- <input type="range" name="range" class="form-control-range " min="0" max="100" [(ngModel)]="progressRange" (ngModelChange)="setRange($event)" value="0"> -->
+            <mat-slider min="0" max="100" value="0" name="range" thumbLabel tickInterval="1" [(ngModel)]="progressRange" (input)="setRange($event)"></mat-slider>
           </div>
           <button type="button" class="btn btn-warning" (click)="reset()">Reset</button>
           <button type="submit" class="btn btn-primary"(click)="addTask()">Add Task</button>
@@ -38,12 +38,13 @@
             <ngb-progressbar value={{task.progress}} type="info" >Completed!</ngb-progressbar>
           </ng-template>
           <button type="button" class="btn btn-danger mt-2" (click)="delete(tasks.indexOf(task))"><i class="fas fa-trash-alt"></i></button>
-          <button type="button" class="btn btn-warning mt-2 ml-1" (click)="task.editTask = !task.editTask"><i class="fas fa-edit"></i></button>
+          <button type="button" class="btn btn-warning mt-2 ml-1" (click)="editTask(tasks.indexOf(task))"><i class="fas fa-edit"></i></button>
+          <button type="button" *ngIf="task.editTask" class="btn btn-success mt-2 ml-1" (click)="saveEditedTask(tasks.indexOf(task))"><i class="far fa-check-circle"></i></button>
           <div class="form-group" *ngIf="task.editTask">
-            <textarea class="form-control noresize" value="{{task.description}}"></textarea>
-            <button type="button" class="btn btn-primary col-12">Save</button>
+            <textarea class="form-control noresize" value="{{task.description}}" [(ngModel)]="task.description"></textarea>
             <ngb-progressbar [showValue]="true" value={{task.progress}} type="info"></ngb-progressbar>
-            <input type="range" name="range" class="form-control-range" min="0" max="100" [(ngModel)]="task.progress" (ngModelChange)="modifyProgress(tasks.indexOf(task), $event)" value="0">
+            <!-- <input type="range" name="range" class="form-control-range" min="0" max="100" [(ngModel)]="task.progress" (ngModelChange)="modifyProgress(tasks.indexOf(task), $event)" value="0"> -->
+            <mat-slider min="0" max="100" value="0" name="range" thumbLabel tickInterval="1" [(ngModel)]="task.progress" (input)="modifyProgress(tasks.indexOf(task), $event)"></mat-slider>
           </div>
         </div>
       </div>
