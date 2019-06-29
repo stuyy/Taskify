@@ -23,7 +23,7 @@ import {
         opacity: 1
       })),
       transition('hidden <=> show', [
-        animate('0.2s ease-in')
+        animate('0.3s ease-in')
       ])
     ])
   ]
@@ -107,5 +107,9 @@ export class AppComponent {
   delete(task)
   {
     console.log(task); // Delete task.
+    let localTasks = JSON.parse(localStorage.tasksAdded);
+    localTasks.splice(task, 1); // Splice the task from  local storage.
+    localStorage.tasksAdded = JSON.stringify(localTasks);
+    this.tasks.splice(task, 1); // Splice the task from memory.
   }
 }

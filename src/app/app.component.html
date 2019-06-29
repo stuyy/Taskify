@@ -21,13 +21,13 @@
             <input type="range" name="range" class="form-control-range" min="0" max="100" [(ngModel)]="progressRange" (ngModelChange)="setRange($event)" value="0">
           </div>
           <button type="button" class="btn btn-warning" (click)="reset()" *ngIf="show">Reset</button>
-            <button type="submit" class="btn btn-primary" *ngIf="show" (click)="addTask()">Add Task</button>
+          <button type="submit" class="btn btn-primary" *ngIf="show" (click)="addTask()">Add Task</button>
         </form>
     </section>
     <aside class="tasks" *ngIf="tasks.length > 0">
       <h1>Tasks</h1>
       <div *ngFor="let task of tasks" [attr.id]="task.title">
-          <button type="button" class="btn btn-info col-12 mt-4" (click)="task.isCollapsed = !task.isCollapsed">View {{task.title}} </button>
+          <button type="button" class="btn btn-info col-12 mt-2" (click)="task.isCollapsed = !task.isCollapsed">View {{task.title}} </button>
           <div [ngbCollapse]="task.isCollapsed" class="task-description">
               <p>{{task.description}}</p>
               <p>Your Progress:</p>
