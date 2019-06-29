@@ -26,7 +26,7 @@ import {
         height: '250px'
       })),
       transition('hidden <=> show', [
-        animate('0.5s ease-in-out')
+        animate('0.3s ease-in-out')
       ])
     ])
   ]
@@ -42,6 +42,8 @@ export class AppComponent {
   progressRange =  0;
   public isCollapsed = true;
   editTaskFlag=false;
+  private cancelIcon = `<i class="far fa-window-close"></i>`;
+  private newTaskIcon = `<i class="fas fa-plus-square"></i>`
   constructor(config: NgbProgressbarConfig)
   {
     config.max = 100;

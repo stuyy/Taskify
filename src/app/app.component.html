@@ -8,7 +8,11 @@
   <section class="main-content">
     <section class="create-task-body">
       <h1>Create a new Task</h1>
-        <button type="button" class="btn btn-success col-12 mt-2" (click)="newTask()"><i class="fas fa-plus-square"></i> {{buttonTaskTitle}}</button>
+        <button type="button" class="btn btn-success col-12 mt-2" (click)="newTask()"><i *ngIf="show; else cancel" class="far fa-window-close"></i>
+          <ng-template #cancel>
+            <i class="fas fa-plus-square"></i>
+          </ng-template>
+          {{buttonTaskTitle}}</button>
         <form class="task-form" [@newTask]="show ? 'show' : 'hidden'">
           <div class="input-group">
               <input type="text" class="form-control" placeholder="Title" name="taskTitle" [(ngModel)]="taskTitle">
@@ -29,9 +33,9 @@
       <h1>Your Tasks</h1>
       <app-modal (delete)="clearingTasks($event)"></app-modal>
       <!-- <button type="button" class="btn btn-secondary col-12 mt-2" (click)="clearAllTasks()">Clear Tasks</button> -->
-      <button type="button" class="btn btn-success col-12 mt-2">Save Tasks</button>
-      <div *ngFor="let task of tasks" [attr.id]="task.title">
-        <button type="button" class="btn btn-info col-12 mt-2" (click)="task.isCollapsed = !task.isCollapsed">View {{task.title}} </button>
+      <button type="button" class="btn btn-success col-12 mt-2" disabled>Save Tasks</button>
+      <div *ngFor="let task of tasks" [attr.id]="task.title" >
+        <button type="button" class="btn btn-info col-12 mt-2" (click)="task.isCollapsed = !task.isCollapsed">Task: {{task.title}} </button>
         <div [ngbCollapse]="task.isCollapsed" class="task-description">
           <p>{{task.description}}</p>
           <p>Your Progress:</p>

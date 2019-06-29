@@ -28,7 +28,7 @@ header {
 .noresize {
     resize: none;
 }
-@media only screen and (max-width: 1341px)
+@media only screen and (max-width: 1350px)
 {
     .main-content
     {
@@ -44,5 +44,12 @@ header {
         text-align: center;
         padding: 7px 0 7px 0;
         transition: padding 1s;
+    }
+}
+
+@media only screen and (min-width: 1920px)
+{
+    .main-content {
+        width: 1920px;
     }
 }
