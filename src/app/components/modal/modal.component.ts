@@ -60,3 +60,4 @@ export class ModalComponent implements OnInit {
     this.opened.close();
   }
 }
+// https://stackoverflow.com/questions/44857626/how-to-access-properties-of-ngbdmodalcontent-from-another-component

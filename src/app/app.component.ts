@@ -17,14 +17,16 @@ import {
     trigger('newTask', [
       state('hidden', style({
         visibility: 'hidden',
-        opacity: 0
+        opacity: 0,
+        height: 0
       })),
       state('show', style({
         visibility: 'visible',
-        opacity: 1
+        opacity: 1,
+        height: '250px'
       })),
       transition('hidden <=> show', [
-        animate('0.3s ease-in')
+        animate('0.5s ease-in-out')
       ])
     ])
   ]
@@ -87,7 +89,7 @@ export class AppComponent {
     let newTask = {
       title: this.taskTitle,
       description: this.taskDescription,
-      isCollapsed: false,
+      isCollapsed: true,
       progress: this.progressRange,
       editTask: false
     }

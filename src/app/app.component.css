@@ -14,13 +14,12 @@ header {
     color: white;
     padding: 7px 0 5px 75px;
 }
-
 .task-description {
     padding: 20px;
     background-color: #D6DFD9;
 }
 .task-form {
-    width:  450px;
+    width: 450px;
 }
 .tasks {
     width: 450px;
