@@ -1,10 +1,9 @@
 <!--The content below is only a placeholder and can be replaced.-->
 
 <header>
-    <h1 class="lead">Stay Organized - Create Some Tasks</h1>
+    <h1 class="lead">Taskify: Stay Organized, Create Some Tasks</h1>
 </header>
 <main>
-  
   <ngb-alert type="danger" (close)="close(error.indexOf(err))" *ngFor="let err of error">{{err}}</ngb-alert>
   <section class="main-content">
     <section>
@@ -27,7 +26,10 @@
         </form>
     </section>
     <aside class="tasks" *ngIf="tasks.length > 0">
-      <h1>Tasks</h1>
+      <h1>Your Tasks</h1>
+      <app-modal (delete)="clearingTasks($event)"></app-modal>
+      <!-- <button type="button" class="btn btn-secondary col-12 mt-2" (click)="clearAllTasks()">Clear Tasks</button> -->
+      <button type="button" class="btn btn-success col-12 mt-2">Save Tasks</button>
       <div *ngFor="let task of tasks" [attr.id]="task.title">
         <button type="button" class="btn btn-info col-12 mt-2" (click)="task.isCollapsed = !task.isCollapsed">View {{task.title}} </button>
         <div [ngbCollapse]="task.isCollapsed" class="task-description">

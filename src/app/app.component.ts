@@ -102,6 +102,10 @@ export class AppComponent {
     console.log(taskToEdit);
     this.tasks[taskToEdit].editTask=true;
   }
+  clearAllTasks()
+  {
+   
+  }
   saveEditedTask(taskToEdit)
   {
     this.tasks[taskToEdit].editTask=false;
@@ -127,6 +131,11 @@ export class AppComponent {
     let localTasks = JSON.parse(localStorage.tasksAdded);
     localTasks[taskIndex].progress = value.value;
     localStorage.tasksAdded = JSON.stringify(localTasks);
+  }
+  clearingTasks($event)
+  {
+    this.tasks = [];
+    localStorage.tasksAdded = [];
   }
   delete(task)
   {

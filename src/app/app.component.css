@@ -1,9 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans&display=swap');
 .main-content {
     display: flex;
     padding: 20px;
     justify-content: space-around;
     width: 70%;
     margin: 0 auto;
+    font-family: 'Fira Sans';
 }
 
 header {
@@ -18,10 +20,11 @@ header {
     background-color: #D6DFD9;
 }
 .task-form {
-    width:  350px;
+    width:  450px;
 }
 .tasks {
-    width: 350px;
+    width: 450px;
+    font-family: 'Fira Sans';
 }
 .noresize {
     resize: none;
@@ -32,8 +35,15 @@ header {
     {
         flex-direction: column;
         width:100%;
+        transition: 1s;
     }
     .task-form, .tasks {
         width: 100%;
+        transition: 1s;
+    }
+    header {
+        text-align: center;
+        padding: 7px 0 7px 0;
+        transition: padding 1s;
     }
 }
