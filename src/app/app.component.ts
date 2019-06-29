@@ -104,6 +104,13 @@ export class AppComponent {
     this.progressRange=parseInt($event);
     console.log(this.progressRange);
   }
+  modifyProgress(taskIndex, value)
+  {
+    this.tasks[taskIndex].progress = value;
+    let localTasks = JSON.parse(localStorage.tasksAdded);
+    localTasks[taskIndex].progress = value;
+    localStorage.tasksAdded = JSON.stringify(localTasks);
+  }
   delete(task)
   {
     console.log(task); // Delete task.

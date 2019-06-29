@@ -23,7 +23,9 @@ header {
 .tasks {
     width: 350px;
 }
-
+.noresize {
+    resize: none;
+}
 @media only screen and (max-width: 1341px)
 {
     .main-content
