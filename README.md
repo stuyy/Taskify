@@ -4,7 +4,7 @@
 
 This project does not use a backend.
 
-https://ansonfoong.github.io/AngularTaskApp/TaskAppNg/
+https://ansonfoong.github.io/Taskify/TaskAppNg/
 
 To-Do:
 
